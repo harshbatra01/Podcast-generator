@@ -1,6 +1,6 @@
 # 🎙️ Podcast Generator
 
-A web application that converts PDF documents into engaging podcast-style conversations using AI. Built with Next.js and powered by Cohere AI.
+A web application that converts PDF documents into engaging podcast-style conversations **between two people** using AI. Built with Next.js and powered by Cohere AI.
 
 ## Features
 
