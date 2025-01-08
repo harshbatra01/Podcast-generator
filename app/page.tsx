@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/app/components/ui/card"
 import { FileUpload } from '@/components/FileUpload'
 import { TextDisplay } from '@/components/TextDisplay'
 import { Loader2 } from 'lucide-react'
