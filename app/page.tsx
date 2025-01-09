@@ -68,7 +68,7 @@ export default function PodcastGenerator() {
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const isSpeaker1 = line.toLowerCase().includes('speaker 1');
-        const voice = isSpeaker1 ? 'US English Female' : 'UK English Male';
+        const voice = isSpeaker1 ? 'US English Female' : 'Australian Male';
         const textToSpeak = line.replace(/Speaker [12]:/, '').trim();
 
         console.log(`Speaking line ${i + 1}:`, textToSpeak);
@@ -130,7 +130,7 @@ export default function PodcastGenerator() {
         model: 'command',
         prompt: `Create a natural podcast conversation between two hosts discussing this text.
                 Format EXACTLY as follows, with each line starting with the speaker label only:
-                Speaker 1: Hey, let's talk about [main theme]. [Ask engaging opening question]
+                Speaker 1: Hey, welcome to this podcast about [main theme]. [Ask engaging opening question]
                 Speaker 2: [Natural response without announcing 'response']
                 Speaker 1: [Follow-up question or comment]
                 Speaker 2: [Natural continuation of discussion]

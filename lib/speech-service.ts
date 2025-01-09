@@ -15,9 +15,8 @@ let isInitialized = false;
 
 export const speechService = {
   init: () => {
-    if (typeof window !== 'undefined' && window.responsiveVoice && !isInitialized) {
+    if (typeof window !== 'undefined' && window.responsiveVoice) {
       window.responsiveVoice.enableWindowClickHook();
-      isInitialized = true;
     }
   },
 
@@ -29,19 +28,16 @@ export const speechService = {
       }
 
       try {
-        const voice = voiceStyle === 'casual' ? 'US English Female' :
-                     voiceStyle === 'formal' ? 'UK English Male' : 'UK English Female';
-
-        window.responsiveVoice.speak(text, voice, {
+        window.responsiveVoice.speak(text, voiceStyle, {
           pitch: 1,
-          rate: 1,
+          rate: 0.9,
           volume: 1,
           onstart: () => {
-            console.log('Started speaking:', text);
+            console.log('Started speaking:', text, 'with voice:', voiceStyle);
           },
           onend: () => {
             console.log('Finished speaking:', text);
-            setTimeout(resolve, 100); // Add small delay before resolving
+            setTimeout(resolve, 100);
           },
           onerror: (error) => {
             console.error('Speech error:', error);
