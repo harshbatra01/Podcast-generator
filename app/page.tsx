@@ -177,9 +177,9 @@ export default function PodcastGenerator() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 p-4 sm:p-6 md:p-8 flex items-center justify-center">
-      <div className="w-full max-w-3xl">
-        <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-xl overflow-hidden">
-          <CardHeader className="text-center pb-6 md:pb-8 border-b px-4 sm:px-6 md:px-8">
+      <div className="w-full max-w-3xl max-h-[90vh] flex flex-col">
+        <Card className="bg-white/95 backdrop-blur-sm shadow-xl rounded-xl overflow-hidden flex flex-col flex-1">
+          <CardHeader className="text-center pb-6 md:pb-8 border-b px-4 sm:px-6 md:px-8 flex-shrink-0">
             <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
               Podcast Generator
             </CardTitle>
@@ -190,7 +190,7 @@ export default function PodcastGenerator() {
               Upload a PDF file and we'll convert it into a natural conversation between two hosts
             </p>
           </CardHeader>
-          <CardContent className="p-4 sm:p-6 md:p-8 relative">
+          <CardContent className="p-4 sm:p-6 md:p-8 relative flex-1 overflow-auto">
             <div className="space-y-6">
               <FileUpload 
                 onUpload={handleTextUpload}
