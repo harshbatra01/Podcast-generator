@@ -48,12 +48,13 @@ export default function PodcastGenerator() {
   const processPDFContent = async (file: File) => {
     try {
       setIsProcessing(true);
+      setError(null); // Clear any previous errors
       
       const pdfText = await extractPDFText(file);
-      console.log('Extracted PDF text:', pdfText);
+      console.log('Extracted PDF text:', pdfText.substring(0, 100) + '...');
       
       const script = await generatePodcastScript(pdfText);
-      console.log('Generated podcast script:', script);
+      console.log('Generated script:', script);
       
       const lines = script.split('\n').filter(line => line.trim());
       
@@ -71,19 +72,23 @@ export default function PodcastGenerator() {
         const voice = isSpeaker1 ? 'US English Female' : 'Australian Male';
         const textToSpeak = line.replace(/Speaker [12]:/, '').trim();
 
-        console.log(`Speaking line ${i + 1}:`, textToSpeak);
-        
-        setTranscriptData(prev => prev.map((item, idx) => ({
-          ...item,
-          isActive: idx === i
-        })));
+        try {
+          setTranscriptData(prev => prev.map((item, idx) => ({
+            ...item,
+            isActive: idx === i
+          })));
 
-        await speechService.generateAudio(textToSpeak, voice);
-        await delay(500);
+          await speechService.generateAudio(textToSpeak, voice);
+          await delay(200);
+        } catch (error) {
+          console.error(`Error speaking line ${i + 1}:`, error);
+          setError('Error generating audio. Please try again.');
+          break;
+        }
       }
     } catch (error) {
       console.error('Error processing PDF:', error);
-      setError('Failed to process PDF file');
+      setError('Failed to process PDF file. Please check the file and try again.');
     } finally {
       setIsProcessing(false);
     }

@@ -16,18 +16,28 @@ let isInitialized = false;
 export const speechService = {
   init: () => {
     if (typeof window !== 'undefined' && window.responsiveVoice) {
-      window.responsiveVoice.enableWindowClickHook();
+      try {
+        window.responsiveVoice.enableWindowClickHook();
+        console.log('ResponsiveVoice initialized successfully');
+      } catch (error) {
+        console.error('Error initializing ResponsiveVoice:', error);
+      }
+    } else {
+      console.warn('ResponsiveVoice not available');
     }
   },
 
   generateAudio: (text: string, voiceStyle: string) => {
     return new Promise<void>((resolve, reject) => {
       if (typeof window === 'undefined' || !window.responsiveVoice) {
+        console.error('ResponsiveVoice not available for speech generation');
         reject('ResponsiveVoice not available');
         return;
       }
 
       try {
+        console.log(`Attempting to speak: "${text}" with voice: ${voiceStyle}`);
+        
         window.responsiveVoice.speak(text, voiceStyle, {
           pitch: 1,
           rate: 0.9,
@@ -37,7 +47,7 @@ export const speechService = {
           },
           onend: () => {
             console.log('Finished speaking:', text);
-            setTimeout(resolve, 100);
+            resolve();
           },
           onerror: (error) => {
             console.error('Speech error:', error);
@@ -45,6 +55,7 @@ export const speechService = {
           }
         });
       } catch (error) {
+        console.error('Error in generateAudio:', error);
         reject(error);
       }
     });

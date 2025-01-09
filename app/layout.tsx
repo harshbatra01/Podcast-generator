@@ -4,14 +4,11 @@ import './globals.css'
 import { Toaster } from "@/app/components/ui/toaster"
 import Script from 'next/script'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Podcast Generator',
-  description: 'Transform text into engaging podcasts',
+  description: 'Transform your text into an engaging podcast',
 }
 
 export default function RootLayout({
@@ -20,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <head>
         <Script 
           src="https://code.responsivevoice.org/responsivevoice.js?key=zhtYFtGH"
           strategy="beforeInteractive"
         />
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className={inter.className}>
         {children}
         <Toaster />
       </body>
